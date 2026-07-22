@@ -1,0 +1,75 @@
+:root {
+  /* Saspolo Hotel palette — midnight slate blue + warm copper + soft ivory.
+     Token names keep the original "forest/amber" naming so every downstream
+     stylesheet works unchanged; only the values differ from the sister site. */
+  --color-forest-900: #16222e;
+  --color-forest-800: #1e2f3f;
+  --color-forest-700: #2a4257;
+  --color-forest-600: #38566f;
+  --color-forest-500: #4a6d8a;
+  --color-forest-100: #e2e9ee;
+
+  --color-amber-700: #8f5a2b;
+  --color-amber-600: #ad6f35;
+  --color-amber-500: #c68544;
+  --color-amber-400: #dba26a;
+  --color-amber-100: #f8efe3;
+
+  --color-cream-50: #faf9f6;
+  --color-cream-100: #f2efe9;
+  --color-cream-200: #e9e4da;
+
+  --color-ink-900: #1f2429;
+  --color-ink-700: #434c55;
+  --color-ink-500: #68727c;
+  --color-stone-300: #d5d5d0;
+  --color-stone-200: #e5e4df;
+
+  --color-white: #ffffff;
+  --color-success: #3b6b4a;
+  --color-star: #c68544;
+  --color-star-empty: #e3ded2;
+
+  /* Typography */
+  --font-display: "Playfair Display", Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 3rem;
+  --fs-4xl: 3.75rem;
+
+  /* Spacing scale (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
+  /* Shadow — cool-tinted, never pure black */
+  --shadow-sm: 0 1px 3px rgba(22, 34, 46, 0.08), 0 1px 2px rgba(22, 34, 46, 0.06);
+  --shadow-md: 0 8px 24px rgba(22, 34, 46, 0.10), 0 2px 6px rgba(22, 34, 46, 0.06);
+  --shadow-lg: 0 20px 48px rgba(22, 34, 46, 0.16), 0 6px 16px rgba(22, 34, 46, 0.08);
+
+  /* Layout */
+  --container-max: 1200px;
+  --header-height: 76px;
+  --transition-fast: 160ms ease;
+  --transition-base: 260ms ease;
+  --transition-slow: 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}

@@ -1,0 +1,47 @@
+/* RTL overrides for Urdu, Punjabi (Shahmukhi), Pashto, Arabic.
+   Most layout already uses logical properties (inset-inline-*, margin-inline-*,
+   text-align: start/end) so it flips automatically with [dir="rtl"] on <html>.
+   This file only covers the handful of things that don't flip on their own. */
+
+[dir="rtl"] {
+  direction: rtl;
+}
+
+/* Star ratings are a graphic unit, not reading text — keep them LTR always
+   so the half-star clip technique in components.css stays correct. */
+.stars {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Directional icons (arrows, "read more" chevrons pointing to reading-end) —
+   apply .icon-flip to any icon whose meaning depends on direction. Symmetric
+   icons (wifi, parking, star, close "x") must NOT get this class. */
+[dir="rtl"] .icon-flip {
+  transform: scaleX(-1);
+}
+
+/* Quote marks / accent rules that use a physical side in decorative contexts */
+[dir="rtl"] .card-eyebrow,
+[dir="rtl"] .eyebrow {
+  direction: rtl;
+}
+
+/* Number/date/phone fragments embedded in RTL copy should still read LTR */
+[dir="rtl"] .keep-ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+}
+
+/* Font: several RTL scripts render better with a touch more line-height */
+[dir="rtl"] body {
+  line-height: 1.75;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4 {
+  line-height: 1.3;
+}

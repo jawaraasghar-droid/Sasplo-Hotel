@@ -1,0 +1,828 @@
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn:hover { transform: translateY(-1px); }
+.btn svg { width: 18px; height: 18px; }
+
+.btn-primary {
+  background: var(--color-amber-500);
+  color: var(--color-forest-900);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background: var(--color-amber-600);
+  color: var(--color-forest-900);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: currentColor;
+  color: var(--color-cream-50);
+}
+
+.btn-outline:hover { color: var(--color-amber-400); }
+
+.btn-dark {
+  background: var(--color-forest-900);
+  color: var(--color-cream-50);
+}
+
+.btn-dark:hover { background: var(--color-forest-700); color: var(--color-white); }
+
+.btn-whatsapp {
+  background: #25D366;
+  color: #0b2e13;
+}
+
+.btn-whatsapp:hover { background: #1ebe5b; color: #0b2e13; }
+
+.btn-block { width: 100%; }
+
+/* ===== Cards ===== */
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+  /* equal-height cards in a row, so their content can align consistently */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.card-body {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+/* Push a card's call-to-action button to the bottom so buttons align across
+   a row even when the descriptions are different lengths. */
+.card-body .btn {
+  margin-top: auto;
+}
+
+.card-eyebrow {
+  font-size: var(--fs-sm);
+  color: var(--color-amber-600);
+  font-weight: 700;
+}
+
+/* ===== Placeholder photo (unified: rooms / gallery / attractions) ===== */
+.placeholder-photo,
+.img-missing {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-2);
+  background: linear-gradient(135deg, var(--color-forest-100) 0%, var(--color-amber-100) 100%);
+  color: var(--color-forest-600);
+  min-height: 220px;
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.placeholder-photo svg, .img-missing svg {
+  width: 40px;
+  height: 40px;
+  opacity: 0.6;
+}
+
+.placeholder-photo span, .img-missing span {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-forest-700);
+}
+
+.media-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--color-stone-200);
+}
+
+.media-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.media-frame:hover img { transform: scale(1.05); }
+
+.media-frame.img-missing img { display: none; }
+
+.media-frame .placeholder-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+}
+
+.media-frame.img-missing .placeholder-fallback {
+  display: flex;
+}
+
+/* ===== Star ratings ===== */
+.stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--color-star);
+  font-size: var(--fs-md);
+  line-height: 1;
+}
+
+.stars .star-empty { color: var(--color-star-empty); }
+
+.star-half {
+  position: relative;
+  display: inline-block;
+  color: var(--color-star-empty);
+}
+
+.star-half::before {
+  content: "★";
+  position: absolute;
+  inset-inline-start: 0;
+  width: 50%;
+  overflow: hidden;
+  color: var(--color-star);
+}
+
+.rating-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-white);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-5);
+  box-shadow: var(--shadow-sm);
+  font-weight: 700;
+  color: var(--color-forest-900);
+}
+
+/* ===== Badges / pills ===== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: var(--color-forest-100);
+  color: var(--color-forest-700);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+}
+
+.badge-amber {
+  background: var(--color-amber-100);
+  color: var(--color-amber-700);
+}
+
+/* ===== Facility / icon grid ===== */
+.icon-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  padding: var(--space-6) var(--space-4);
+}
+
+.icon-tile .icon-wrap {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--color-forest-100);
+  color: var(--color-forest-700);
+}
+
+.icon-tile .icon-wrap svg { width: 30px; height: 30px; }
+
+.icon-tile h4 { margin-bottom: var(--space-1); }
+.icon-tile p { font-size: var(--fs-sm); margin: 0; }
+
+/* ===== Accordion (Nearby Attractions) ===== */
+.accordion-item {
+  border-bottom: 1px solid var(--color-stone-200);
+}
+
+.accordion-item:first-child { border-top: 1px solid var(--color-stone-200); }
+
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  background: none;
+  border: none;
+  padding: var(--space-5) var(--space-2);
+  text-align: start;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  color: var(--color-forest-900);
+}
+
+.accordion-trigger:hover { color: var(--color-amber-600); }
+
+.accordion-trigger .chevron {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+}
+
+.accordion-trigger[aria-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+.accordion-panel {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--space-6);
+  align-items: center;
+  padding: 0 var(--space-2) var(--space-6);
+}
+
+/* Higher specificity than .accordion-panel so the hidden attribute (set via
+   JS: panel.hidden = true) actually wins instead of being overridden by the
+   display:grid rule above. */
+.accordion-panel[hidden] {
+  display: none;
+}
+
+.accordion-panel .media-frame {
+  border-radius: var(--radius-md);
+  aspect-ratio: 4 / 3;
+}
+
+@media (max-width: 760px) {
+  .accordion-panel { grid-template-columns: 1fr; }
+}
+
+/* ===== Gallery / Lightbox ===== */
+.gallery-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+  margin-bottom: var(--space-7);
+}
+
+.gallery-tab {
+  background: var(--color-white);
+  border: 1px solid var(--color-stone-300);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-ink-700);
+}
+
+.gallery-tab[aria-pressed="true"] {
+  background: var(--color-forest-900);
+  border-color: var(--color-forest-900);
+  color: var(--color-white);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.gallery-grid button.media-frame {
+  border: none;
+  padding: 0;
+  border-radius: var(--radius-md);
+  cursor: zoom-in;
+  width: 100%;
+}
+
+/* Wrapper used only when a tile needs a visible caption below it (currently
+   the Restaurants Nearby category, so each place's name is legible) */
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.gallery-caption {
+  margin: 0;
+  text-align: center;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-forest-900);
+}
+
+@media (max-width: 760px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(22, 24, 21, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+  padding: var(--space-6);
+}
+
+.lightbox.is-open { display: flex; }
+
+.lightbox-media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: min(90vw, 1100px);
+}
+
+.lightbox img {
+  max-width: min(90vw, 1100px);
+  max-height: 78vh;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+}
+
+.lightbox-caption {
+  margin: 0;
+  color: var(--color-white);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  text-align: center;
+}
+
+.lightbox-close, .lightbox-prev, .lightbox-next {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-white);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.lightbox-close { top: var(--space-5); inset-inline-end: var(--space-5); }
+.lightbox-prev { inset-inline-start: var(--space-5); top: 50%; transform: translateY(-50%); }
+.lightbox-next { inset-inline-end: var(--space-5); top: 50%; transform: translateY(-50%); }
+.lightbox-close svg, .lightbox-prev svg, .lightbox-next svg { width: 22px; height: 22px; }
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  height: min(88vh, 820px);
+  min-height: 520px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--color-forest-900);
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, rgba(16, 26, 19, 0.86) 0%, rgba(16, 26, 19, 0.35) 55%, rgba(16, 26, 19, 0.45) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: var(--color-white);
+  padding-bottom: var(--space-9);
+  max-width: 760px;
+}
+
+.hero-content .eyebrow { color: var(--color-amber-400); }
+
+.hero-content h1 {
+  color: var(--color-white);
+  font-size: var(--fs-4xl);
+}
+
+.hero-sub {
+  color: var(--color-cream-100);
+  font-size: var(--fs-md);
+  max-width: 560px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-5);
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: var(--space-5);
+  inset-inline-end: var(--space-5);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  animation: scrollCueBounce 2.4s ease-in-out infinite;
+}
+
+.scroll-cue svg { width: 20px; height: 20px; }
+
+@keyframes scrollCueBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+@media (max-width: 760px) {
+  .hero { height: min(92vh, 720px); align-items: flex-end; }
+  .hero-content h1 { font-size: var(--fs-3xl); }
+  .scroll-cue { display: none; }
+}
+
+/* ===== CTA band ===== */
+.cta-band {
+  background: var(--color-forest-900);
+  color: var(--color-white);
+  text-align: center;
+  padding-block: var(--space-8);
+}
+
+.cta-band h2 { color: var(--color-white); }
+.cta-band p { color: var(--color-cream-100); margin-bottom: var(--space-6); }
+
+/* ===== Inner-page banner (About, Rooms, Gallery, Facilities, Attractions, Booking, Contact) ===== */
+.page-banner {
+  background: linear-gradient(120deg, var(--color-forest-800), var(--color-forest-600));
+  background-size: cover;
+  background-position: center;
+  color: var(--color-white);
+  padding-block: var(--space-8) var(--space-7);
+  text-align: center;
+}
+
+/* ===== Full-screen photo pages (booking / about / facilities / contact) =====
+   A fixed cover photo sits behind the whole viewport; the page content floats
+   in a translucent "sheet" so the photo is visible across the entire screen
+   (around and faintly through the content) while text stays fully readable. */
+body.page-bg {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+body.page-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(rgba(22, 34, 46, 0.5), rgba(22, 34, 46, 0.6));
+  z-index: 0;
+  pointer-events: none;
+}
+
+body.page-bg .site-header,
+body.page-bg main,
+body.page-bg .site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+body.page-bg main {
+  max-width: 1120px;
+  margin: var(--space-7) auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: rgba(250, 249, 246, 0.90);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  box-shadow: var(--shadow-lg);
+}
+
+body.page-bg .section,
+body.page-bg .section-tight {
+  background: transparent !important;
+}
+
+@media (max-width: 1180px) {
+  body.page-bg main { margin-inline: var(--space-4); }
+}
+
+.page-banner .eyebrow { color: var(--color-amber-400); }
+.page-banner h1 { color: var(--color-white); margin-bottom: 0; }
+
+.page-banner-sub {
+  color: var(--color-cream-100);
+  max-width: 640px;
+  margin: var(--space-3) auto 0;
+}
+
+/* ===== About — story typography ===== */
+.story-block { max-width: 760px; margin-inline: auto; }
+
+.story-lead {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  color: var(--color-forest-900);
+  line-height: 1.5;
+}
+
+/* Body paragraphs of the story read at a comfortable, standard article size */
+.story-block p:not(.story-lead) {
+  font-size: var(--fs-md);
+  line-height: 1.75;
+}
+
+/* ===== Attractions carousel (click / swipe through place cards) ===== */
+.carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  flex: 1 1 auto;
+  /* vertical breathing room so a hovered card can grow without being clipped */
+  padding-block: var(--space-5);
+}
+
+.carousel-track {
+  display: flex;
+  gap: var(--space-5);
+  transition: transform var(--transition-slow);
+  will-change: transform;
+}
+
+.carousel-card {
+  flex: 0 0 calc((100% - 2 * var(--space-5)) / 3);
+  transition: transform var(--transition-base);
+}
+
+.carousel-card .media-frame {
+  border-radius: var(--radius-md);
+  aspect-ratio: 4 / 3;
+  transition: box-shadow var(--transition-base);
+}
+
+/* Amazon-style: the card lifts and enlarges on hover, image zooms in */
+.carousel-card:hover {
+  transform: scale(1.08);
+  z-index: 3;
+  position: relative;
+}
+
+.carousel-card:hover .media-frame {
+  box-shadow: var(--shadow-lg);
+}
+
+.carousel-card:hover .media-frame img {
+  transform: scale(1.12);
+}
+
+.carousel-card-name {
+  text-align: center;
+  margin: var(--space-4) 0 var(--space-1);
+  font-size: var(--fs-lg);
+  color: var(--color-forest-900);
+}
+
+.carousel-card-blurb {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-ink-700);
+  margin: 0;
+}
+
+.carousel-btn {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-stone-300);
+  background: var(--color-white);
+  color: var(--color-forest-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition-fast), opacity var(--transition-fast);
+}
+
+.carousel-btn:hover { background: var(--color-cream-100); }
+.carousel-btn svg { width: 22px; height: 22px; }
+.carousel-btn[disabled] { opacity: 0.35; cursor: default; box-shadow: none; }
+
+@media (max-width: 959px) {
+  .carousel-card { flex-basis: calc((100% - var(--space-5)) / 2); }
+}
+
+@media (max-width: 639px) {
+  .carousel-card { flex-basis: 100%; }
+  .carousel-btn { width: 42px; height: 42px; }
+}
+
+/* ===== Rooms ===== */
+.room-meta {
+  font-size: var(--fs-sm);
+  color: var(--color-amber-600);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.room-facilities { margin-bottom: var(--space-4); }
+
+.room-facilities li {
+  position: relative;
+  padding-inline-start: var(--space-5);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-700);
+  margin-bottom: var(--space-2);
+}
+
+.room-facilities li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.5em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-forest-500);
+}
+
+.room-rate {
+  font-weight: 700;
+  color: var(--color-forest-800);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--space-4);
+}
+
+/* ===== Contact ===== */
+.contact-method {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  margin-bottom: var(--space-5);
+}
+
+.contact-method .icon-wrap {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background: var(--color-forest-100);
+  color: var(--color-forest-700);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-method .icon-wrap svg { width: 20px; height: 20px; }
+.contact-method p { margin: 0; }
+.contact-method .contact-label { font-weight: 700; color: var(--color-forest-900); }
+
+/* ===== Embedded map ===== */
+.map-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-stone-200);
+}
+
+.map-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .map-embed { aspect-ratio: 4 / 3; }
+}
+
+/* ===== Forms ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.form-field-full { grid-column: 1 / -1; }
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-stone-300);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  color: var(--color-ink-900);
+}
+
+.form-field textarea { min-height: 110px; resize: vertical; }
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--color-amber-500);
+}
+
+.field-error {
+  color: #a3402c;
+  font-size: var(--fs-sm);
+  margin-top: var(--space-1);
+  display: none;
+}
+
+.form-field.has-error input,
+.form-field.has-error select {
+  border-color: #a3402c;
+}
+
+.form-field.has-error .field-error { display: block; }
+
+.disclaimer-box {
+  background: var(--color-amber-100);
+  border: 1px solid var(--color-amber-400);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  font-size: var(--fs-sm);
+  color: var(--color-ink-700);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.disclaimer-box svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: var(--color-amber-700);
+}
+
+.form-actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .accordion-trigger { font-size: var(--fs-md); }
+}
