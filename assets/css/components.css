@@ -530,7 +530,9 @@ body.page-bg::before {
   pointer-events: none;
 }
 
-body.page-bg .site-header,
+/* The header keeps its own sticky position and z-index: 100 — do NOT pull it
+   down to z-index: 1 here, or the mobile nav dropdown (fixed, inside the
+   header) opens underneath the translucent main sheet and looks broken. */
 body.page-bg main,
 body.page-bg .site-footer {
   position: relative;
