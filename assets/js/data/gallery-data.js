@@ -55,8 +55,8 @@ window.HR_GALLERY = [
       { src: "assets/images/gallery/surroundings/surroundings-02.jpg", alt: "Fields and homes below the mountains" },
       { src: "assets/images/gallery/surroundings/surroundings-03.jpg", alt: "Apple orchard in the valley" },
       { src: "assets/images/gallery/surroundings/surroundings-04.jpg", alt: "Red geraniums in the garden" },
-      { src: "assets/images/gallery/surroundings/surroundings-05.jpg", alt: "Poplar trees below snowy peaks" },
-      { src: "assets/images/gallery/surroundings/surroundings-06.jpg", alt: "A quiet Skardu street" }
+      { src: "assets/images/gallery/views/views-03.jpg", alt: "Poplar trees below snowy peaks" },
+      { src: "assets/images/gallery/views/views-02.jpg", alt: "A quiet Skardu street" }
     ]
   }
 ];

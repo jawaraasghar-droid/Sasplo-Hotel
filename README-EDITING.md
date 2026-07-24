@@ -13,7 +13,7 @@ All photos live under `assets/images/`. To replace one, save your new `.jpg` ove
   - `food/` — named per dish (`biryani.jpg`, `mamtu.jpg`, `mutton-karahi.jpg`, …)
   - `restaurant/restaurant-01.jpg` … `restaurant-06.jpg` — each has a visible restaurant-name caption, set in `gallery-data.js` (`caption` field). Only this category shows captions.
   - `views/views-01.jpg` … `views-06.jpg`
-  - `surroundings/surroundings-01.jpg` … `surroundings-06.jpg`
+  - `surroundings/surroundings-01.jpg` … `surroundings-04.jpg` (the last two Surroundings entries reuse photos from the `views/` folder — see `gallery-data.js`)
 - **Page background photos** (About / Booking / Facilities / Contact): `assets/images/backgrounds/<pagename>.jpg`
 - **Nearby attractions** (`assets/images/attractions/`): one photo per place, named after the place (e.g. `deosai-national-park.jpg`)
 - **Social-share preview image** (shown when the site link is shared on WhatsApp/Facebook): `assets/images/og/og-default.jpg`

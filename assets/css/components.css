@@ -524,6 +524,15 @@ body.page-bg {
   background-attachment: fixed;
 }
 
+/* iOS Safari (and some mobile browsers) don't support fixed backgrounds —
+   they render the photo stretched to the full page height, hugely zoomed
+   and blurry. Fall back to a normal scrolling background on small screens. */
+@media (max-width: 900px) {
+  body.page-bg {
+    background-attachment: scroll;
+  }
+}
+
 body.page-bg::before {
   content: "";
   position: fixed;
