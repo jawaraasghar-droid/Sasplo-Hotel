@@ -17,10 +17,11 @@
 <meta name="twitter:title" content="Book Your Stay — Saspolo Hotel | Skardu">
 <meta name="twitter:description" content="Send a booking request to Saspolo Hotel in Skardu — pick your dates and room, and we'll confirm availability by WhatsApp or phone.">
 <meta name="twitter:image" content="https://www.saspolohotel.example/assets/images/og/og-default.jpg">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%231e2f3f'/%3E%3Cpath d='M9 33V20c0-6 5-11 11-11s11 5 11 11v13h-4.2V20a6.8 6.8 0 10-13.6 0v13H9z' fill='%23c68544'/%3E%3Ccircle cx='20' cy='19' r='3' fill='%23dba26a'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/images/backgrounds/booking.jpg" fetchpriority="high">
 <link rel="stylesheet" href="assets/css/variables.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/layout.css">
@@ -35,11 +36,7 @@
 <header class="site-header" id="site-header">
   <div class="container">
     <a href="index.html" class="brand">
-      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M7 35V20C7 12.82 12.82 7 20 7c7.18 0 13 5.82 13 13v15h-5V20a8 8 0 10-16 0v15H7z" fill="var(--color-forest-700)"></path>
-        <circle cx="20" cy="18" r="3.5" fill="var(--color-amber-500)"></circle>
-        <path d="M15.5 35v-7.5a4.5 4.5 0 019 0V35h-9z" fill="var(--color-amber-600)"></path>
-      </svg>
+      <img class="brand-mark" src="assets/images/logo.png" alt="">
       <span data-i18n="common.siteName">Saspolo Hotel</span>
     </a>
 
@@ -215,7 +212,17 @@
         <h4 data-i18n="footer.contact">Contact</h4>
         <ul class="footer-links">
           <li><a href="tel:+923555014433" class="keep-ltr">+92 355 5014433</a></li>
-          <li><a href="https://wa.me/923555014433" target="_blank" rel="noopener" data-i18n="common.whatsappUs">WhatsApp Us</a></li>
+          <li class="footer-social">
+            <a href="https://wa.me/923555014433" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.5 15.2L2 22l4.9-1.5A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 1 1-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.3-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 01-2-1.2 7.5 7.5 0 01-1.4-1.7c-.1-.3 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.4-.3z"></path></svg>
+            </a>
+            <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=Karimi.mazahir@gmail.com" target="_blank" rel="noopener" aria-label="Email" title="Karimi.mazahir@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+            </a>
+            <a href="https://www.facebook.com/HotelSaspoloSkardu" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7h2.3l.4-3h-2.7V9.1c0-.9.3-1.5 1.6-1.5h1.2V4.9c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3V11H8.9v3h2.3v7h2.3z"></path></svg>
+            </a>
+          </li>
           <li><a href="https://maps.app.goo.gl/Dnu6MF6ETTMuakKG8" target="_blank" rel="noopener" data-i18n="footer.location">Skardu, Gilgit-Baltistan, Pakistan</a></li>
         </ul>
       </div>

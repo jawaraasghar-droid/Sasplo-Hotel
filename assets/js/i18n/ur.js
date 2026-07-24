@@ -250,6 +250,7 @@ window.HR_I18N.ur = {
     whatsappLabel: "واٹس ایپ",
     whatsappCta: "کسی بھی وقت پیغام بھیجیں",
     emailLabel: "ای میل",
+    facebookLabel: "فیس بک",
     locationLabel: "مقام",
     formNameLabel: "پورا نام",
     formNameError: "براہِ کرم اپنا نام درج کریں۔",

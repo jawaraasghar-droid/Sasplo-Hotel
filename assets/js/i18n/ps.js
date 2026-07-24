@@ -250,6 +250,7 @@ window.HR_I18N.ps = {
     whatsappLabel: "واټساپ",
     whatsappCta: "هر وخت موږ ته پیغام واستوئ",
     emailLabel: "بریښنالیک",
+    facebookLabel: "فېسبوک",
     locationLabel: "موقعیت",
     formNameLabel: "بشپړ نوم",
     formNameError: "مهرباني وکړئ خپل نوم ولیکئ.",

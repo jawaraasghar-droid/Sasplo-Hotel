@@ -250,6 +250,7 @@ window.HR_I18N.de = {
     whatsappLabel: "WhatsApp",
     whatsappCta: "Schreiben Sie uns jederzeit",
     emailLabel: "E-Mail",
+    facebookLabel: "Facebook",
     locationLabel: "Standort",
     formNameLabel: "Vollständiger Name",
     formNameError: "Bitte geben Sie Ihren Namen ein.",

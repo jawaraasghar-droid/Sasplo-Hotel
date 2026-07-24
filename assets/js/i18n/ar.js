@@ -250,6 +250,7 @@ window.HR_I18N.ar = {
     whatsappLabel: "واتساب",
     whatsappCta: "راسلونا في أي وقت",
     emailLabel: "البريد الإلكتروني",
+    facebookLabel: "فيسبوك",
     locationLabel: "الموقع",
     formNameLabel: "الاسم الكامل",
     formNameError: "يرجى إدخال اسمكم.",

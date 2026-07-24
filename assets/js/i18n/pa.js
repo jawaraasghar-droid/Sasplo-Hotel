@@ -250,6 +250,7 @@ window.HR_I18N.pa = {
     whatsappLabel: "واٹس ایپ",
     whatsappCta: "کسے وی ویلے سانوں پیغام بھیجو",
     emailLabel: "ای میل",
+    facebookLabel: "فیس بک",
     locationLabel: "تھاں",
     formNameLabel: "پورا ناں",
     formNameError: "براہ مہربانی اپݨا ناں لکھو۔",

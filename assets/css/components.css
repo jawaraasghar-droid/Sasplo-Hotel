@@ -515,6 +515,9 @@
    in a translucent "sheet" so the photo is visible across the entire screen
    (around and faintly through the content) while text stays fully readable. */
 body.page-bg {
+  /* Dark tone close to the photos + overlay, so the moment before the
+     background image finishes loading doesn't flash white. */
+  background-color: #22303e;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

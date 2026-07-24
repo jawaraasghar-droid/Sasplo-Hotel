@@ -250,6 +250,7 @@ window.HR_I18N.hi = {
     whatsappLabel: "व्हाट्सएप",
     whatsappCta: "कभी भी संदेश भेजें",
     emailLabel: "ईमेल",
+    facebookLabel: "फ़ेसबुक",
     locationLabel: "स्थान",
     formNameLabel: "पूरा नाम",
     formNameError: "कृपया अपना नाम दर्ज करें।",

@@ -250,6 +250,7 @@ window.HR_I18N.zh = {
     whatsappLabel: "WhatsApp",
     whatsappCta: "随时给我们发消息",
     emailLabel: "电子邮箱",
+    facebookLabel: "Facebook",
     locationLabel: "地址",
     formNameLabel: "姓名",
     formNameError: "请填写您的姓名。",
