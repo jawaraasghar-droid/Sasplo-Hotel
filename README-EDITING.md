@@ -1,5 +1,7 @@
 # Editing This Site — Plain-English Guide
 
+> **Easier way:** once the admin panel is set up (see `SETUP-ADMIN.md`), photos, rooms, reviews, and contact info can all be edited from `admin.html` in your browser — no file editing or re-uploading. The sections below remain the manual fallback, and cover a few things the panel doesn't (translations, page text).
+
 This website is plain HTML, CSS, and JavaScript files — no special software or account needed to edit it. Open any `.html` file in a text editor (even Notepad works, though a free editor like VS Code or Notepad++ makes it easier to read) and change the text between the tags. Save the file, refresh the page in your browser, and you'll see the change.
 
 ## 1. Photos
