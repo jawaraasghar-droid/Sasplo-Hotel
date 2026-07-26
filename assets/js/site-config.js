@@ -11,5 +11,5 @@ window.SITE_CONFIG = {
   location: "Skardu, Gilgit-Baltistan, Pakistan",
   mapUrl: "https://maps.app.goo.gl/Dnu6MF6ETTMuakKG8",
   geo: { lat: 35.2900158, lng: 75.6198522 },
-  domainPlaceholder: "https://www.saspolohotel.example"
+  domain: "https://hotelsaspolo.com"
 };
