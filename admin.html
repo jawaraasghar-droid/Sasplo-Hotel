@@ -50,6 +50,27 @@
   .preview-box { background: var(--cream); border: 1px dashed var(--stone); border-radius: 8px; padding: 12px; margin-top: 12px; font-size: 13px; white-space: pre-wrap; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
   @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } .item { flex-wrap: wrap; } }
+
+  /* Room photo thumbnails and their overlay controls */
+  .photo-cell { position: relative; }
+  .photo-cell img { width: 110px; height: 80px; object-fit: cover; border-radius: 6px; background: var(--stone); display: block; }
+  .photo-remove {
+    position: absolute; top: -6px; right: -6px; width: 24px; height: 24px;
+    border-radius: 50%; border: none; background: var(--err); color: #fff;
+    cursor: pointer; line-height: 1; font-size: 15px; padding: 0;
+  }
+  .photo-tag {
+    position: absolute; left: 4px; bottom: 4px; background: rgba(0,0,0,.7);
+    color: #fff; font-size: 10px; padding: 3px 8px; border-radius: 99px;
+    border: none; line-height: 1.3;
+  }
+  button.photo-tag { cursor: pointer; }
+  /* Fingers need bigger targets than mouse pointers do. */
+  @media (pointer: coarse) {
+    .photo-cell img { width: 132px; height: 96px; }
+    .photo-remove { width: 36px; height: 36px; top: -10px; right: -10px; font-size: 20px; }
+    .photo-tag { font-size: 12px; padding: 12px 14px; }
+  }
 </style>
 </head>
 <body>
@@ -490,39 +511,205 @@
   /* ================= ROOMS ================= */
   const ROOMS_PATH = "assets/js/data/rooms-data.js";
 
+  const slugify = (s) =>
+    (s || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "room";
+
   async function renderRooms() {
     const { text, sha } = await readTextFile(ROOMS_PATH);
     const data = parseDataFile(text).HR_ROOMS;
+
+    // Photos the owner can pick from: everything already in the gallery.
+    const gallery = parseDataFile((await readTextFile(GALLERY_PATH)).text).HR_GALLERY || [];
+    const available = [];
+    gallery.forEach((c) =>
+      c.images.forEach((i) =>
+        available.push({ path: i.src, label: c.label + " — " + (i.caption || i.alt || i.src.split("/").pop()) })
+      )
+    );
+
+    const pendingUploads = []; // {path, base64} — written only when Save is pressed
+    const preview = (p) => {
+      const up = pendingUploads.find((u) => u.path === p);
+      return up ? "data:image/jpeg;base64," + up.base64 : p;
+    };
+
     panelEl.innerHTML = "";
     panelEl.appendChild(el("<h2>Rooms</h2>"));
-    panelEl.appendChild(el("<p class='hint'>Edit room names, descriptions, and the price line. To show a real price, simply type it in the price line (e.g. \"PKR 8,500 / night\").</p>"));
-    data.forEach((room) => {
-      const card = el(
-        "<div class='item' style='display:block;'>" +
-          "<div class='grid2'>" +
-            "<div><label>Room name</label><input type='text' class='f-name'></div>" +
-            "<div><label>Price line</label><input type='text' class='f-rate'></div>" +
-          "</div>" +
-          "<label>Description</label><textarea class='f-desc'></textarea>" +
-        "</div>"
-      );
-      card.querySelector(".f-name").value = room.name;
-      card.querySelector(".f-name").addEventListener("input", (e) => (room.name = e.target.value));
-      card.querySelector(".f-rate").value = room.rateNote;
-      card.querySelector(".f-rate").addEventListener("input", (e) => (room.rateNote = e.target.value));
-      card.querySelector(".f-desc").value = room.description;
-      card.querySelector(".f-desc").addEventListener("input", (e) => (room.description = e.target.value));
-      panelEl.appendChild(card);
+    panelEl.appendChild(el("<p class='hint'>Edit room details, choose which photos appear on each room, and add or remove room types. The <strong>first photo</strong> is the one shown on the Rooms page card. To show a real price, just type it in the price line (e.g. \"PKR 8,500 / night\").</p>"));
+
+    const list = el("<div></div>");
+    panelEl.appendChild(list);
+
+    function draw() {
+      list.innerHTML = "";
+      data.forEach((room, ri) => {
+        const card = el(
+          "<div class='item' style='display:block;'>" +
+            "<div class='grid2'>" +
+              "<div><label>Room name</label><input type='text' class='f-name'></div>" +
+              "<div><label>Price line</label><input type='text' class='f-rate'></div>" +
+            "</div>" +
+            "<label>Description</label><textarea class='f-desc'></textarea>" +
+            "<label>Badge text <span style='font-weight:400;color:#6b6b64;'>(small label on the card)</span></label>" +
+            "<input type='text' class='f-tier'>" +
+            "<label>Photos</label>" +
+            "<div class='f-photos' style='display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;'></div>" +
+            "<div style='display:flex; gap:8px; flex-wrap:wrap; align-items:center;'>" +
+              "<select class='f-pick' style='flex:1; min-width:200px; max-width:340px;'></select>" +
+              "<button class='btn secondary f-add' style='margin-top:0;'>Use this photo</button>" +
+              "<button class='btn secondary f-up' style='margin-top:0;'>Upload new</button>" +
+              "<input type='file' accept='image/*' class='f-file' style='display:none;'>" +
+            "</div>" +
+            "<button class='btn danger f-del' style='margin-top:14px;'>Delete this room type</button>" +
+          "</div>"
+        );
+
+        const nameIn = card.querySelector(".f-name");
+        nameIn.value = room.name || "";
+        nameIn.addEventListener("input", (e) => (room.name = e.target.value));
+
+        const rateIn = card.querySelector(".f-rate");
+        rateIn.value = room.rateNote || "";
+        rateIn.addEventListener("input", (e) => (room.rateNote = e.target.value));
+
+        const descIn = card.querySelector(".f-desc");
+        descIn.value = room.description || "";
+        descIn.addEventListener("input", (e) => (room.description = e.target.value));
+
+        const tierIn = card.querySelector(".f-tier");
+        tierIn.value = room.tier || "";
+        tierIn.addEventListener("input", (e) => {
+          room.tier = e.target.value;
+          // A translated badge would override typed text, so drop the
+          // translation link once the owner writes their own wording.
+          room.tierKey = "";
+        });
+
+        // --- photo thumbnails, with remove + reorder-to-front ---
+        const photosWrap = card.querySelector(".f-photos");
+        (room.images || []).forEach((src, pi) => {
+          const cell = el("<div class='photo-cell'></div>");
+          const img = el("<img>");
+          img.src = preview(src);
+          img.title = src.split("/").pop();
+          cell.appendChild(img);
+          if (pi === 0) {
+            cell.appendChild(el("<span class='photo-tag'>on card</span>"));
+          } else {
+            const mk = el("<button class='photo-tag' title='Show this one on the card'>make main</button>");
+            mk.addEventListener("click", () => { room.images.splice(0, 0, room.images.splice(pi, 1)[0]); draw(); });
+            cell.appendChild(mk);
+          }
+          const rm = el("<button class='photo-remove' title='Remove' aria-label='Remove photo'>×</button>");
+          rm.addEventListener("click", () => { room.images.splice(pi, 1); draw(); });
+          cell.appendChild(rm);
+          photosWrap.appendChild(cell);
+        });
+        if (!(room.images || []).length) {
+          photosWrap.appendChild(el("<p class='hint' style='margin:0; color:#b3402e;'>Every room needs at least one photo — add one below before saving.</p>"));
+        }
+
+        // --- pick an existing gallery photo ---
+        const pick = card.querySelector(".f-pick");
+        available.concat(pendingUploads.map((u) => ({ path: u.path, label: "Just uploaded — " + u.path.split("/").pop() })))
+          .forEach((a) => {
+            const o = el("<option></option>");
+            o.value = a.path;
+            o.textContent = a.label.length > 60 ? a.label.slice(0, 57) + "…" : a.label;
+            pick.appendChild(o);
+          });
+        card.querySelector(".f-add").addEventListener("click", () => {
+          const p = pick.value;
+          if (!p) return;
+          room.images = room.images || [];
+          if (room.images.includes(p)) { status("err", "That photo is already on this room."); return; }
+          room.images.push(p);
+          draw();
+        });
+
+        // --- upload a brand-new photo ---
+        const fileIn = card.querySelector(".f-file");
+        card.querySelector(".f-up").addEventListener("click", () => fileIn.click());
+        fileIn.addEventListener("change", async () => {
+          const file = fileIn.files[0];
+          if (!file) return;
+          try {
+            status("busy", "Preparing photo…");
+            const base64 = await compressImage(file, 1600, 0.82);
+            const path = "assets/images/gallery/rooms/rooms-a" + Date.now() + ".jpg";
+            pendingUploads.push({ path, base64 });
+            room.images = room.images || [];
+            room.images.push(path);
+            draw();
+            status("ok", "Photo added — press Save rooms to publish it.");
+          } catch (e) { status("err", e.message); }
+          fileIn.value = "";
+        });
+
+        // --- delete the whole room type ---
+        card.querySelector(".f-del").addEventListener("click", () => {
+          if (data.length === 1) { status("err", "At least one room type is needed."); return; }
+          if (confirm("Delete the room type \"" + (room.name || "untitled") + "\"? It will disappear from the Rooms page and the booking form.")) {
+            data.splice(ri, 1);
+            draw();
+          }
+        });
+
+        list.appendChild(card);
+      });
+    }
+    draw();
+
+    const addBtn = el("<button class='btn secondary'>+ Add a room type</button>");
+    addBtn.addEventListener("click", () => {
+      data.push({
+        slug: "new-room-" + (data.length + 1),
+        name: "New Room",
+        tierKey: "",
+        tier: "",
+        description: "",
+        rateNote: "Contact us for current rates",
+        images: [],
+      });
+      draw();
+      status("ok", "Room added at the bottom — fill it in, then press Save rooms.");
     });
-    const saveBtn = el("<button class='btn'>Save rooms</button>");
+    panelEl.appendChild(addBtn);
+
+    const saveBtn = el("<button class='btn' style='margin-left:8px;'>Save rooms</button>");
     saveBtn.addEventListener("click", async () => {
+      // The Rooms page reads images[0] directly, so a room with no photo
+      // would break that page — refuse to save one.
+      const empty = data.filter((r) => !(r.images || []).length).map((r) => r.name || "untitled");
+      if (empty.length) {
+        status("err", "Add a photo to: " + empty.join(", ") + " — every room needs at least one.");
+        return;
+      }
+
+      // Keep slugs unique and tidy — they drive the booking form's room links.
+      const used = {};
+      data.forEach((r) => {
+        let base = slugify(r.slug && !r.slug.startsWith("new-room-") ? r.slug : r.name);
+        let s = base, n = 2;
+        while (used[s]) s = base + "-" + n++;
+        used[s] = true;
+        r.slug = s;
+      });
+
       saveBtn.disabled = true;
       try {
-        status("busy", "Saving…");
+        for (let i = 0; i < pendingUploads.length; i++) {
+          status("busy", "Uploading photo " + (i + 1) + " of " + pendingUploads.length + "…");
+          await writeFile(pendingUploads[i].path, pendingUploads[i].base64, null, "Add room photo");
+        }
+        status("busy", "Saving rooms…");
         await writeTextFile(ROOMS_PATH, serializeDataFile("HR_ROOMS", data), sha, "Update rooms");
         status("ok", "Saved! The site updates itself in about 2 minutes.");
-      } catch (e) { status("err", "Save failed: " + e.message); }
-      saveBtn.disabled = false;
+        setTimeout(() => openTab("rooms"), 1200);
+      } catch (e) {
+        status("err", "Save failed: " + e.message);
+        saveBtn.disabled = false;
+      }
     });
     panelEl.appendChild(saveBtn);
   }
