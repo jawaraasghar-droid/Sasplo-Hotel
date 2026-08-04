@@ -840,3 +840,84 @@ body.page-bg .section-tight {
   .form-grid { grid-template-columns: 1fr; }
   .accordion-trigger { font-size: var(--fs-md); }
 }
+
+/* ===== Journal / "Notes from Saspolo" =====
+   Posts read like short letters: a generous photo, then larger, roomier
+   text than the rest of the site uses, on a comfortable reading measure. */
+.journal-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.post {
+  background: var(--color-white);
+  border: 1px solid var(--color-stone-200);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.post-images img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Two or more photos sit side by side and stay the same height. */
+.post-images-multi {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2px;
+}
+
+.post-images-multi img {
+  height: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.post-body {
+  padding: var(--space-6) var(--space-6) var(--space-7);
+}
+
+.post-date {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-amber-700);
+  margin-bottom: var(--space-3);
+}
+
+.post-title {
+  font-size: var(--fs-2xl);
+  line-height: 1.25;
+  margin-bottom: var(--space-4);
+  color: var(--color-forest-900);
+}
+
+.post-body p {
+  font-size: var(--fs-lg);
+  line-height: 1.75;
+  color: var(--color-ink-700);
+  margin-bottom: var(--space-4);
+}
+
+.post-body p:last-child { margin-bottom: 0; }
+
+.journal-empty {
+  text-align: center;
+  font-size: var(--fs-lg);
+  color: var(--color-ink-700);
+  padding-block: var(--space-8);
+}
+
+@media (max-width: 640px) {
+  .post-body { padding: var(--space-5) var(--space-5) var(--space-6); }
+  .post-title { font-size: var(--fs-xl); }
+  .post-body p { font-size: var(--fs-md); line-height: 1.7; }
+}

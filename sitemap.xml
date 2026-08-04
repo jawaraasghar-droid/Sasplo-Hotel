@@ -25,6 +25,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://hotelsaspolo.com/journal.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://hotelsaspolo.com/about.html</loc>
     <lastmod>2026-07-24</lastmod>
     <changefreq>monthly</changefreq>

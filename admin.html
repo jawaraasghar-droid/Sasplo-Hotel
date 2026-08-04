@@ -236,6 +236,7 @@
     ["photos", "Photos"],
     ["special", "Logo, Hero & Backgrounds"],
     ["rooms", "Rooms"],
+    ["journal", "Journal"],
     ["reviews", "Reviews"],
     ["text", "Website Text"],
     ["contact", "Contact Info"],
@@ -252,7 +253,7 @@
   function openTab(id) {
     tabsEl.querySelectorAll("button").forEach((b) => b.classList.toggle("active", b.dataset.tab === id));
     panelEl.innerHTML = "<p class='hint'>Loading…</p>";
-    ({ photos: renderPhotos, special: renderSpecial, rooms: renderRooms, reviews: renderReviews, text: renderText, contact: renderContact })[id]().catch((e) =>
+    ({ photos: renderPhotos, special: renderSpecial, rooms: renderRooms, journal: renderJournal, reviews: renderReviews, text: renderText, contact: renderContact })[id]().catch((e) =>
       (panelEl.innerHTML = "<p class='hint'>Could not load: " + e.message + "</p>")
     );
   }
@@ -714,6 +715,145 @@
     panelEl.appendChild(saveBtn);
   }
 
+  /* ================= JOURNAL ================= */
+  const POSTS_PATH = "assets/js/data/posts-data.js";
+  const todayISO = () => new Date().toISOString().slice(0, 10);
+
+  async function renderJournal() {
+    const { text, sha } = await readTextFile(POSTS_PATH);
+    const data = parseDataFile(text).HR_POSTS || [];
+
+    const pendingUploads = [];
+    const preview = (p) => {
+      const up = pendingUploads.find((u) => u.path === p);
+      return up ? "data:image/jpeg;base64," + up.base64 : p;
+    };
+
+    panelEl.innerHTML = "";
+    panelEl.appendChild(el("<h2>Journal — Notes from Saspolo</h2>"));
+    panelEl.appendChild(el("<p class='hint'>Write a post with photos and as much text as you like. Photos are shrunk automatically before upload, so adding lots of them will not slow the website down. Newest posts appear first on the page.</p>"));
+
+    const list = el("<div></div>");
+    panelEl.appendChild(list);
+
+    function draw() {
+      list.innerHTML = "";
+      // newest first, matching how the page displays them
+      data.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+
+      data.forEach((post, pi) => {
+        const card = el(
+          "<div class='item' style='display:block;'>" +
+            "<div class='grid2'>" +
+              "<div><label>Date</label><input type='date' class='f-date'></div>" +
+              "<div><label>Title</label><input type='text' class='f-title' placeholder='e.g. The road to Deosai is open'></div>" +
+            "</div>" +
+            "<label>What you want to say</label>" +
+            "<textarea class='f-body' style='min-height:170px;' placeholder='Write as much as you like. Leave a blank line between paragraphs.'></textarea>" +
+            "<label>Photos</label>" +
+            "<div class='f-photos' style='display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;'></div>" +
+            "<button class='btn secondary f-up' style='margin-top:0;'>Add a photo</button>" +
+            "<input type='file' accept='image/*' multiple class='f-file' style='display:none;'>" +
+            "<button class='btn danger f-del' style='margin-top:14px;'>Delete this post</button>" +
+          "</div>"
+        );
+
+        const dateIn = card.querySelector(".f-date");
+        dateIn.value = post.date || todayISO();
+        dateIn.addEventListener("change", (e) => { post.date = e.target.value; });
+
+        const titleIn = card.querySelector(".f-title");
+        titleIn.value = post.title || "";
+        titleIn.addEventListener("input", (e) => (post.title = e.target.value));
+
+        const bodyIn = card.querySelector(".f-body");
+        bodyIn.value = post.body || "";
+        bodyIn.addEventListener("input", (e) => (post.body = e.target.value));
+
+        const photosWrap = card.querySelector(".f-photos");
+        (post.images || []).forEach((src, ii) => {
+          const cell = el("<div class='photo-cell'></div>");
+          const img = el("<img>");
+          img.src = preview(src);
+          cell.appendChild(img);
+          const rm = el("<button class='photo-remove' title='Remove' aria-label='Remove photo'>×</button>");
+          rm.addEventListener("click", () => { post.images.splice(ii, 1); draw(); });
+          cell.appendChild(rm);
+          photosWrap.appendChild(cell);
+        });
+        if (!(post.images || []).length) {
+          photosWrap.appendChild(el("<p class='hint' style='margin:0;'>No photo — that is fine, a post can be words only.</p>"));
+        }
+
+        const fileIn = card.querySelector(".f-file");
+        card.querySelector(".f-up").addEventListener("click", () => fileIn.click());
+        fileIn.addEventListener("change", async () => {
+          const files = Array.from(fileIn.files || []);
+          if (!files.length) return;
+          try {
+            for (let i = 0; i < files.length; i++) {
+              status("busy", "Preparing photo " + (i + 1) + " of " + files.length + "…");
+              const base64 = await compressImage(files[i], 1600, 0.82);
+              const path = "assets/images/journal/journal-" + Date.now() + "-" + i + ".jpg";
+              pendingUploads.push({ path, base64 });
+              post.images = post.images || [];
+              post.images.push(path);
+            }
+            draw();
+            status("ok", files.length + " photo(s) added — press Save journal to publish.");
+          } catch (e) { status("err", e.message); }
+          fileIn.value = "";
+        });
+
+        card.querySelector(".f-del").addEventListener("click", () => {
+          if (confirm("Delete this post? It will disappear from the website.")) {
+            data.splice(pi, 1);
+            draw();
+          }
+        });
+
+        list.appendChild(card);
+      });
+
+      if (!data.length) {
+        list.appendChild(el("<p class='hint'>No posts yet. Press “Write a new post” to start.</p>"));
+      }
+    }
+    draw();
+
+    const addBtn = el("<button class='btn secondary'>+ Write a new post</button>");
+    addBtn.addEventListener("click", () => {
+      data.unshift({ date: todayISO(), title: "", body: "", images: [] });
+      draw();
+      status("ok", "New post added at the top — write it, then press Save journal.");
+    });
+    panelEl.appendChild(addBtn);
+
+    const saveBtn = el("<button class='btn' style='margin-left:8px;'>Save journal</button>");
+    saveBtn.addEventListener("click", async () => {
+      const blank = data.filter((p) => !(p.title || "").trim() && !(p.body || "").trim());
+      if (blank.length) {
+        status("err", "One post is still empty — give it a title or some words, or delete it.");
+        return;
+      }
+      saveBtn.disabled = true;
+      try {
+        for (let i = 0; i < pendingUploads.length; i++) {
+          status("busy", "Uploading photo " + (i + 1) + " of " + pendingUploads.length + "…");
+          await writeFile(pendingUploads[i].path, pendingUploads[i].base64, null, "Add journal photo");
+        }
+        status("busy", "Saving journal…");
+        await writeTextFile(POSTS_PATH, serializeDataFile("HR_POSTS", data), sha, "Update journal");
+        status("ok", "Saved! The site updates itself in about 2 minutes.");
+        setTimeout(() => openTab("journal"), 1200);
+      } catch (e) {
+        status("err", "Save failed: " + e.message);
+        saveBtn.disabled = false;
+      }
+    });
+    panelEl.appendChild(saveBtn);
+  }
+
   /* ================= REVIEWS ================= */
   const REVIEWS_PATH = "assets/js/data/reviews-data.js";
 
@@ -831,7 +971,7 @@
   }
 
   /* ================= CONTACT INFO ================= */
-  const PAGES = ["index.html", "rooms.html", "booking.html", "gallery.html", "about.html", "facilities.html", "attractions.html", "contact.html"];
+  const PAGES = ["index.html", "rooms.html", "booking.html", "gallery.html", "journal.html", "about.html", "facilities.html", "attractions.html", "contact.html"];
 
   function phoneForms(digits) {
     // digits like "923555014433"

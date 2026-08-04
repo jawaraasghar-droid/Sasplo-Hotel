@@ -20,6 +20,7 @@ window.HR_I18N.pa = {
     rooms: "کمرے",
     booking: "بُکنگ",
     gallery: "گیلری",
+    journal: "ڈائری",
     about: "ساڈے بارے",
     facilities: "سہولتاں",
     attractions: "سیاحتی تھاں",
@@ -113,6 +114,13 @@ window.HR_I18N.pa = {
     eyebrow: "گیلری",
     title: "آوݨ توں پہلے اک نیڑلی جھلک",
     bannerSub: "گیسٹ ہاؤس، کمرے، کھاݨا، تے باہر دروازے دے نظارے۔"
+  },
+
+  journal: {
+    eyebrow: "مالک ولوں",
+    title: "سسپولو توں گلاں",
+    bannerSub: "ایتھے جو کجھ وی ہو رہیا اے — موسم، سڑکاں، رسوئی، تے اوہ مہمان جیہڑے دوست بن جاندے نیں۔",
+    empty: "پہلی لکھت چھیتی آ رہی اے۔"
   },
 
   attractionsPage: {

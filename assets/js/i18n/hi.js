@@ -20,6 +20,7 @@ window.HR_I18N.hi = {
     rooms: "कमरे",
     booking: "बुकिंग",
     gallery: "गैलरी",
+    journal: "डायरी",
     about: "परिचय",
     facilities: "सुविधाएँ",
     attractions: "दर्शनीय स्थल",
@@ -113,6 +114,13 @@ window.HR_I18N.hi = {
     eyebrow: "गैलरी",
     title: "आने से पहले एक करीबी झलक",
     bannerSub: "गेस्टहाउस, कमरे, खाना, और ठीक दरवाज़े के बाहर के नज़ारे।"
+  },
+
+  journal: {
+    eyebrow: "मालिक की ओर से",
+    title: "सस्पोलो से बातें",
+    bannerSub: "यहाँ जो भी हो रहा है — मौसम, सड़कें, रसोई, और वे मेहमान जो दोस्त बन जाते हैं।",
+    empty: "पहली पोस्ट जल्द आ रही है।"
   },
 
   attractionsPage: {

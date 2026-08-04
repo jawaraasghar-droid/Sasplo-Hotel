@@ -20,6 +20,7 @@ window.HR_I18N.zh = {
     rooms: "客房",
     booking: "预订",
     gallery: "图库",
+    journal: "手记",
     about: "关于我们",
     facilities: "设施服务",
     attractions: "景点",
@@ -113,6 +114,13 @@ window.HR_I18N.zh = {
     eyebrow: "图库",
     title: "抵达前，先一睹为快",
     bannerSub: "客栈全貌、客房环境、美食佳肴，以及门外的绝美风光。"
+  },
+
+  journal: {
+    eyebrow: "来自店主",
+    title: "萨斯波洛手记",
+    bannerSub: "这里正在发生的一切——季节、道路、厨房，以及成为朋友的客人。",
+    empty: "第一篇即将发布，敬请期待。"
   },
 
   attractionsPage: {

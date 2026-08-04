@@ -20,6 +20,7 @@ window.HR_I18N.ps = {
     rooms: "کوټې",
     booking: "بُکینګ",
     gallery: "ګالري",
+    journal: "ډایري",
     about: "زموږ په اړه",
     facilities: "اسانتیاوې",
     attractions: "ښکلي ځایونه",
@@ -113,6 +114,13 @@ window.HR_I18N.ps = {
     eyebrow: "ګالري",
     title: "د راتلو نه مخکې یوه نږدې کتنه",
     bannerSub: "کوربه‌توب کور، کوټې، خواړه، او د دروازې مخکې منظرې."
+  },
+
+  journal: {
+    eyebrow: "د مالک لخوا",
+    title: "د ساسپولو یادونه",
+    bannerSub: "هر څه چې دلته کیږي — موسمونه، لارې، پخلنځی، او هغه میلمانه چې ملګري کیږي.",
+    empty: "لومړی یادښت ژر راځي."
   },
 
   attractionsPage: {

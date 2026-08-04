@@ -20,6 +20,7 @@ window.HR_I18N.en = {
     rooms: "Rooms",
     booking: "Booking",
     gallery: "Gallery",
+    journal: "Journal",
     about: "About",
     facilities: "Facilities",
     attractions: "Attractions",
@@ -113,6 +114,13 @@ window.HR_I18N.en = {
     eyebrow: "Gallery",
     title: "A closer look before you arrive",
     bannerSub: "The guesthouse, the rooms, the food, and the views right outside the door."
+  },
+
+  journal: {
+    eyebrow: "From the Owner",
+    title: "Notes from Saspolo",
+    bannerSub: "Whatever is happening here — the seasons, the roads, the kitchen, and the guests who become friends.",
+    empty: "The first note is on its way — please check back soon."
   },
 
   attractionsPage: {

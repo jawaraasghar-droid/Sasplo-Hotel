@@ -230,10 +230,10 @@ img.brand-mark {
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Collapse to the hamburger menu below 1024px — with 8 nav items plus the
+/* Collapse to the hamburger menu below 1100px — with 9 nav items plus the
    language select, Book Now button, and the (wide) logo, the inline nav
-   overlaps the brand name at tablet widths. */
-@media (max-width: 1024px) {
+   pushes the header wider than the screen at tablet widths. */
+@media (max-width: 1100px) {
   .main-nav {
     position: fixed;
     inset: var(--header-height) 0 0 0;

@@ -20,6 +20,7 @@ window.HR_I18N.de = {
     rooms: "Zimmer",
     booking: "Buchung",
     gallery: "Galerie",
+    journal: "Journal",
     about: "Über Uns",
     facilities: "Ausstattung",
     attractions: "Ausflugsziele",
@@ -113,6 +114,13 @@ window.HR_I18N.de = {
     eyebrow: "Galerie",
     title: "Ein genauerer Blick vor Ihrer Ankunft",
     bannerSub: "Das Gästehaus, die Zimmer, das Essen und die Aussicht direkt vor der Tür."
+  },
+
+  journal: {
+    eyebrow: "Vom Gastgeber",
+    title: "Notizen aus Saspolo",
+    bannerSub: "Was hier gerade geschieht — die Jahreszeiten, die Straßen, die Küche und die Gäste, die zu Freunden werden.",
+    empty: "Der erste Beitrag folgt in Kürze — schauen Sie bald wieder vorbei."
   },
 
   attractionsPage: {

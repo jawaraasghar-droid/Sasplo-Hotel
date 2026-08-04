@@ -20,6 +20,7 @@ window.HR_I18N.ur = {
     rooms: "کمرے",
     booking: "بکنگ",
     gallery: "گیلری",
+    journal: "ڈائری",
     about: "ہمارے بارے میں",
     facilities: "سہولیات",
     attractions: "سیاحتی مقامات",
@@ -113,6 +114,13 @@ window.HR_I18N.ur = {
     eyebrow: "گیلری",
     title: "آمد سے پہلے ایک قریبی جھلک",
     bannerSub: "گیسٹ ہاؤس، کمرے، کھانا، اور دروازے کے باہر کا نظارہ۔"
+  },
+
+  journal: {
+    eyebrow: "مالک کی طرف سے",
+    title: "سسپولو سے باتیں",
+    bannerSub: "یہاں جو بھی ہو رہا ہے — موسم، سڑکیں، کچن، اور وہ مہمان جو دوست بن جاتے ہیں۔",
+    empty: "پہلی تحریر جلد آ رہی ہے۔"
   },
 
   attractionsPage: {
